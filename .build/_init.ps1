@@ -20,7 +20,6 @@ function global:merge ([string] $GithubApiToken, [string] $revision) {
     if ($pulls.total_count -lt 1) { Write-Host "No PRs for this revision. Bye!"; return; }
     $pull = $pulls.items | Select -First 1
     $pullNumber = $pull.number
-    $pullUrl = $pull.html_url
     Write-Host "Merging #$pullNumber..."
     Invoke-RestMethod -Headers $headers -Uri "https://api.github.com/repos/$owner/$repo/pulls/$pullNumber/merge" -Method PUT
 }
