@@ -28,5 +28,5 @@ function global:merge ([string] $GithubApiToken, [string]$branch, [string] $revi
     if ($pullSha -notcontains $revision) { Write-Host "This build [$revision] isn't for the head commit, [$pullSha].  Bye!"; return; }
         
     Write-Host "Merging #$pullNumber..."
-    Invoke-RestMethod -Headers $headers -Uri "https://api.github.com/repos/$owner/$repo/pulls/$pullNumber/merge" -Body "sha: $pullSha" -Method PUT
+    Invoke-RestMethod -Headers $headers -Uri "https://api.github.com/repos/$owner/$repo/pulls/$pullNumber/merge" -Body "{'sha': '$pullSha'}" -Method PUT
 }
