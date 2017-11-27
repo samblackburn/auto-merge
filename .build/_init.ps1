@@ -22,5 +22,5 @@ function global:merge ([string] $GithubApiToken, [string]$branch, [string] $revi
     $pull = $pulls.items | Select -First 1
     $pullNumber = $pull.number
     Write-Host "Merging #$pullNumber..."
-    Invoke-RestMethod -Headers $headers -Uri "https://api.github.com/repos/$owner/$repo/pulls/$pullNumber/merge" -Method PUT
+    Invoke-RestMethod -Headers $headers -Uri "https://api.github.com/repos/$owner/$repo/pulls/$pullNumber/merge" -Body "sha: $revision" -Method PUT
 }
